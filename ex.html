@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aligned Textboxes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column; /* Set the direction to column */
+      gap: 10px; /* Adjust the gap as needed */
+    }
+
+    .textbox-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .textbox-container label {
+      flex: 0 0 auto; /* Prevent label from affecting flex layout */
+      margin-right: 10px; /* Adjust the spacing between label and input */
+    }
+
+    .textbox {
+      flex: 1; /* Take up remaining space in the container */
+      height: 40px; /* Adjust the height as needed */
+      border: 1px solid black;
+      border-radius: 8px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="textbox-container">
+      <label for="textbox1">Textboxcsa 1:</label>
+      <input type="text" id="textbox1" class="textbox">
+    </div>
+
+    <div class="textbox-container">
+      <label for="textbox2">Textb 2:</label>
+      <input type="text" id="textbox2" class="textbox">
+    </div>
+
+    <div class="textbox-container">
+      <label for="textbox3">Textbox 3:</label>
+      <input type="text" id="textbox3" class="textbox">
+    </div>
+    
+    <!-- Add more textbox-container divs as needed -->
+  </div>
+</body>
+</html>
