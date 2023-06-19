@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Sites</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .button {
+      border: none;
+      color: black;
+      padding: 12px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border: 2px solid black;
+    }
+
+    .button1 {
+      background-color: lightblue;
+    }
+
+    .formDiv {
+      width: 150vh;
+    }
+
+    .formDiv input[type="text"],
+    .formDiv select {
+      width: 50%;
+      padding: 10px 15px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .divLeft {
+      width: 50%;
+      height: 100px;
+      float: left;
+      background-color: lightgreen;
+    }
+
+    .divRight {
+      margin-left: 50%;
+      height: 100px;
+      background-color: lightblue;
+    }
+
+    textarea {
+      width: 50%;
+      padding: 10px 15px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Admin Sites</h2>
+  <p>This is the admin site.</p>
+
+  <button class="button button1">Sites</button>
+  <button class="button button1">Add/Edit Site</button>
+  <button class="button button1">Content Sections</button>
+
+  <hr>
+
+  <div class="formDiv">
+    <div class="divLeft">
+      <form>
+        <label for="fname">Name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+
+        <label for="key">Key:</label>
+        <input type="text" id="key" name="key"><br><br>
+
+        <label for="contact-email">Contact Email:</label>
+        <input type="text" id="contact-email" name="contact-email"><br><br>
+
+        <label for="contact-email-text">Contact Email Text:</label>
+        <input type="text" id="contact-email-text" name="contact-email-text"><br><br>
+
+        <label for="report-path">Report Path:</label>
+        <input type="text" id="report-path" name="report-path"><br><br>
+
+        <label for="report-archive-path">Report Archive Path:</label>
+        <input type="text" id="report-archive-path" name="report-archive-path"><br><br>
+      </form>
+    </div>
+
+    <div class="divRight">
+      <form>
+        <label for="manual-report-full-url">Manual Report Full URL:</label><br>
+        <textarea name="manual-report-full-url" id="manual-report-full-url" cols="30" rows="2"></textarea><br><br>
+
+        <label for="manual-report-site">Manual Report Site:</label><br>
+        <textarea name="manual-report-site" id="manual-report-site" cols="30" rows="2"></textarea><br><br>
+
+        <label for="manual-report-site-content">Manual Report Site Content:</label><br>
+        <textarea name="manual-report-site-content" id="manual-report-site-content" cols="30" rows="2"></textarea><br><br>
+
+        <label for="help-url">Help URL:</label><br>
+        <textarea name="help-url" id="help-url" cols="30" rows="2"></textarea><br><br>
+
+        <label for="default-product-group">Default Product Group:</label><br>
+        <textarea name="default-product-group" id="default-product-group" cols="30" rows="2"></textarea><br><br>
+
+        <label for="admin-access-groups">Admin Access Groups:</label><br>
+        <textarea name="admin-access-groups" id="admin-access-groups" cols="30" rows="2"></textarea><br><br>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
