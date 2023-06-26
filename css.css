@@ -1,0 +1,111 @@
+the css for this code:
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+.button {
+  border: none;
+  color: black;
+  padding: 12px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: 2px solid black;
+}
+
+.button1 {
+  background-color: lightblue;
+}
+
+.formDiv {
+  width: 150vh;
+}
+
+.formDiv input[type="text"], formDiv select {
+  flex: 1;
+  width: 50%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.divLeft {
+  width: 40%;
+  height: 50vh;
+  float: left;
+}
+
+.divRight {
+  margin-left: 60%;
+  height: 50vh;
+}
+
+textarea {
+  width: 50%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+#fname {
+    display: inline;
+}
+
+.textbox {
+  flex: 1;
+  height: 40px; 
+  width: 100vh;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
+  display: block;
+}
+
+
+.textbox-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+
+.textbox-container label {
+  flex: 0 0 auto;
+  margin-right: 10px;
+}
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.labels {
+  display: contents;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btnLeft {
+  margin-left: 100vh;
+}
+
+input.largerCheckBox {
+  width: 20px;
+  height: 25px;
+}
+

@@ -1,0 +1,33 @@
+<h2>Admin Sites</h2>
+<p>This is Edit/Add form.</p>
+
+<div class="formDiv">
+  <div class="divLeft"> 
+    <form id="myForm">
+      <div class="container">
+        <div class="textbox-container">
+          <label for="fname">Name:</label>
+          <input type="text" id="fname" name="fname" class="textbox"><br><br>
+        </div>
+        <div class="textbox-container">
+          <label for="key">Key:</label>
+          <input type="text" id="key" name="key" class="textbox"><br><br>
+        </div>
+        <!-- ... repeat for other fields ... -->
+      </div>
+    </form>
+  </div>
+
+  <div class="divRight">
+    <form>
+      <label for="manual-report-full-url">Manual Report Full URL:</label>
+      <textarea name="manual-report-full-url" id="manual-report-full-url" cols="30" rows="2"></textarea><br><br>
+      <!-- ... repeat for other fields ... -->
+    </form>
+  </div>
+</div>
+
+<div class="btnLeft">
+  <button class="button">Save</button>
+  <button class="button button1">Cancel</button>
+</div>

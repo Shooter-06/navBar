@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .form-container {
+      margin-left: 50px;
+      display: flex;
+      justify-content: space-between;
+      width: 115vh;
+      align-items: flex-start;
+    }
+
+    .form-column {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .input-group label {
+      width: 40%;
+      text-align: right;
+      margin-right: 10px;
+    }
+
+    .input-group input[type="text"] {
+      width: 55%;
+    }
+  </style>
+</head>
+<body>
+  <h2>Admin Sites</h2>
+  <p>This is the Add/Edit Content section </p>
+  <div class="form-container">
+    <div id="left" class="form-column">
+      <form>
+        <div class="input-group">
+          <label for="site">Site</label>
+          <input type="text" id="site" name="site">
+        </div>
+
+        <div class="input-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name">
+        </div>
+
+        <div class="input-group">
+          <label for="key">Number of Columns</label>
+          <input type="text" id="key" name="key">
+        </div>
+
+        <div class="input-group">
+          <label for="email">Bottom Section</label>
+          <input type="text" id="email" name="email">
+        </div>
+
+        <div class="input-group">
+          <label for="contactEmailText">Sort Order</label>
+          <input type="text" id="contactEmailText" name="contactEmailText">
+        </div>
+
+        <div class="input-group">
+          <label for="reportPath">Active</label>
+          <input type="text" id="reportPath" name="reportPath">
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

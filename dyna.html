@@ -1,0 +1,57 @@
+<div class="nav nav-tabs" id="myTab" role="tablist">
+    <div *ngFor="let tab of tabs" class="nav-item" (click)="setActiveTab(tab)">
+      <a [class.active]="tab.active" class="nav-link" [id]="tab.id" href="javascript:void(0)" role="tab" aria-controls="home" [attr.aria-selected]="tab.active">{{tab.name}}</a>
+    </div>
+  </div>
+  
+  <div class="tab-content" id="myTabcontent">
+    <div *ngFor="let tab of tabs">
+      <div *ngIf="tab.active" class="tab-pane fade show active" id="{{tab.id}}" role="tabpanel" aria-labelledby="home-tab">
+        <ng-container [ngSwitch]="tab.component">
+          <app-site *ngSwitchCase="'SiteComponent'"></app-site>
+          <app-add-edit *ngSwitchCase="'AddEditComponent'"></app-add-edit>
+          <app-content-section *ngSwitchCase="'ContentSectionComponent'"></app-content-section>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="nav nav-tabs" id="myTab" role="tablist">
+    <div *ngFor="let tab of tabs" class="nav-item" (click)="setActiveTab(tab)">
+        <a [class.active]="tab.active" class="nav-link" [id]="tab.id" href="javascript:void(0)" role="tab" aria-controls="home" [attr.aria-selected]="tab.active">{{tab.name}}</a>
+    </div>
+</div>
+
+<div class="tab-content" id="myTabContent">
+    <div *ngFor="let tab of tabs" class="tab-pane fade show" [id]="tab.id" role="tabpanel" aria-labelledby="home-tab" *ngIf="tab.active">{{tab.content}}</div>
+</div> -->
+
+
+<!-- <div class="nav nav-tabs" id="myTab" role="tablist">
+    <div *ngFor="let tab of tabs" class="nav-item" (click)="setActiveTab(tab)">
+        <a [class.active]="tab.active" class="nav-link" [id]="tab.id" href="javascript:void(0)" role="tab" aria-controls="home" [attr.aria-selected]="tab.active">{{tab.name}}</a>
+    </div>
+</div>
+
+<div class="tab-content" id="myTabContent">
+    <div *ngFor="let tab of tabs" class="tab-pane fade show" [id]="tab.id" role="tabpanel" aria-labelledby="home-tab" *ngIf="tab.active">{{tab.content}}</div>
+</div> -->
