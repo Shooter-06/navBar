@@ -1,3 +1,43 @@
+export class User {
+  name: string;
+  email: string;
+}
+
+
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { User } from '../user';
+
+@Component({
+  selector: 'app-user-form',
+  templateUrl: './user-form.component.html',
+  styleUrls: ['./user-form.component.css']
+})
+export class UserFormComponent {
+  userForm: FormGroup;
+  user: User = new User();
+
+  constructor(private fb: FormBuilder) {
+    this.createForm();
+  }
+
+  createForm() {
+    this.userForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+
+  onSubmit() {
+    if (this.userForm.valid) {
+      this.user = this.userForm.value;
+      console.log(this.user);
+      // You can perform further actions here, such as sending data to the server
+    }
+  }
+}
+
+
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <div>
     <label for="name">Name:</label>
