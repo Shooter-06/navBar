@@ -1,0 +1,131 @@
+export interface MyFormValues {
+  name: string;
+  key: string;
+  contactEmail: string;
+  contactEmailText: string;
+  reportPath: string;
+  reportArchivePath: string;
+  division: boolean;
+  active: boolean;
+  manualReportFullUrl: string;
+  manualReportSite: string;
+  manualReportSiteContent: string;
+  helpUrl: string;
+  defaultProductGroup: boolean[];
+  adminAccessGroup: string;
+}
+
+
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { MyFormValues } from './my-form-values.interface';
+
+@Component({
+  selector: 'app-my-form',
+  templateUrl: './my-form.component.html',
+  styleUrls: ['./my-form.component.css']
+})
+export class MyFormComponent implements OnInit {
+  formGroup: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
+    this.formGroup = this.fb.group({
+      name: [''],
+      key: [''],
+      contactEmail: [''],
+      contactEmailText: [''],
+      reportPath: [''],
+      reportArchivePath: [''],
+      division: [false],
+      active: [false],
+      manualReportFullUrl: [''],
+      manualReportSite: [''],
+      manualReportSiteContent: [''],
+      helpUrl: [''],
+      defaultProductGroup: this.fb.array([]),
+      adminAccessGroup: ['']
+    });
+  }
+
+  save() {
+    const formValues: MyFormValues = this.formGroup.value;
+    console.log(formValues);
+  }
+
+  cancel() {
+    this.initForm();
+  }
+}
+
+<form [formGroup]="formGroup">
+  <div style="display: flex; justify-content: space-between;">
+    <div>
+      <!-- Your left div form controls here -->
+      <div>
+        <label>Name</label>
+        <input type="text" formControlName="name">
+      </div>
+      <div>
+        <label>Key</label>
+        <input type="text" formControlName="key">
+      </div>
+      <div>
+        <label>Contact Email</label>
+        <input type="text" formControlName="contactEmail">
+      </div>
+      <div>
+        <label>Contact Email Text</label>
+        <input type="text" formControlName="contactEmailText">
+      </div>
+      <div>
+        <label>Report Path</label>
+        <textarea formControlName="reportPath"></textarea>
+      </div>
+      <div>
+        <label>Report Archive Path</label>
+        <textarea formControlName="reportArchivePath"></textarea>
+      </div>
+      <div>
+        <label><input type="checkbox" formControlName="division"> Division</label>
+      </div>
+      <div>
+        <label><input type="checkbox" formControlName="active"> Active</label>
+      </div>
+    </div>
+    <div>
+      <!-- Your right div form controls here -->
+      <div>
+        <label>Manual Report Full URL</label>
+        <textarea formControlName="manualReportFullUrl"></textarea>
+      </div>
+      <div>
+        <label>Manual Report Site</label>
+        <textarea formControlName="manualReportSite"></textarea>
+      </div>
+      <div>
+        <label>Manual Report Site Content</label>
+        <textarea formControlName="manualReportSiteContent"></textarea>
+      </div>
+      <div>
+        <label>Help URL</label>
+        <textarea formControlName="helpUrl"></textarea>
+      </div>
+      <!-- Here you would want to dynamically generate checkboxes for "defaultProductGroup" -->
+      <div>
+        <label>Admin Access Group</label>
+        <input type="text" formControlName="adminAccessGroup">
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;">
+    <button type="button" (click)="save()">Save</button>
+    <button type="button" (click)="cancel()">Cancel</button>
+  </div>
+</form>
+
