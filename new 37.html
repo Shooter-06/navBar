@@ -1,0 +1,64 @@
+<!-- Angular Form -->
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="name">Name: </label>
+    <input type="text" id="name" formControlName="name">
+
+    <div *ngIf="userForm.get('name').errors && userForm.get('name').dirty">
+      <div *ngIf="userForm.get('name').errors.required">Name is required. </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email">
+
+    <div *ngIf="userForm.get('email').errors && userForm.get('email').dirty">
+      <div *ngIf="userForm.get('email').errors.required">Email is required. </div>
+      <div *ngIf="userForm.get('email').errors.email">Invalid email format. </div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="userForm.invalid">Submit</button>
+</form>
+
+// Angular Component
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+interface User {
+  name: string;
+  email: string;
+}
+
+@Component({
+  selector: 'app-test-component',
+  templateUrl: './test-component.component.html',
+  styleUrls: ['./test-component.component.scss']
+})
+export class TestComponent implements OnInit {
+  userForm!: FormGroup;
+  user!: User;
+
+  constructor(private fb: FormBuilder) {
+    this.createForm();
+  }
+
+  ngOnInit(): void {}
+
+  createForm() {
+    this.userForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+
+  onSubmit() {
+    if (this.userForm.valid) {
+      this.user = this.userForm.value;
+      console.log(this.user);
+      // You can perform further actions here, such as sending data to the server
+    }
+  }
+}
