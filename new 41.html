@@ -1,0 +1,47 @@
+import { Component, OnInit } from '@angular/core';
+
+interface MarketDataType {
+  id: number;
+  productGroupNames: string;
+}
+
+@Component ({
+  selector: 'app-test3',
+  templateUrl: './test3.component.html',
+  styleUrls: ['./test3.component.scss']
+})
+export class Test3Component implements OnInit {
+  productNames: string[];
+  selectedStocks: MarketDataType[] = [];
+  
+  // Let's define marketPete as an array of 50 objects with id and names
+  marketPete: {id: number, name: string}[] = Array.from({length: 50}, (_, index) => ({id: index, name: `Product ${index}`}));
+
+  ngOnInit() {
+    // Now we're using marketPete as our source array
+    this.productNames = this.marketPete.slice(0, 30).map((item, index) => `S${index}`);
+  }
+
+  onSelectionChange($event: any) {
+    console.log($event);
+  }
+}
+
+<p>test3 works!</p>
+
+<nsui-multi-select [items]="productNames" [(ngModel)]="selectedStocks" name="stock" (select)="onSelectionChange($event)"></nsui-multi-select>
+
+<br /><br />
+
+<div style="height: 100px; overflow-y: auto" *ngIf="selectedStocks.length">
+  Selected:
+  <pre>{{ selectedStocks | json }}</pre>
+</div>
+
+
+<msui-multi-select [items]="productNames" [(ngModel)]="selectedStocks" name="stock">
+  <ng-template let-item>
+    {{item.name}}
+  </ng-template>
+</msui-multi-select>
+

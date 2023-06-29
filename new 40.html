@@ -1,3 +1,73 @@
+export interface MyFormValues {
+  name: string;
+  key: string;
+  contactEmail: string;
+  contactEmailText: string;
+  reportPath: string;
+  reportArchivePath: string;
+  division: boolean;
+  active: boolean;
+  manualReportFullUrl: string;
+  manualReportSite: string;
+  manualReportSiteContent: string;
+  helpUrl: string;
+  defaultProductGroup: boolean[];
+  adminAccessGroup: string;
+}
+
+
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { MyFormValues } from './my-form-values.interface';
+
+@Component({
+  selector: 'app-my-form',
+  templateUrl: './my-form.component.html',
+  styleUrls: ['./my-form.component.css']
+})
+export class MyFormComponent implements OnInit {
+  formGroup: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
+    this.formGroup = this.fb.group({
+      name: [''],
+      key: [''],
+      contactEmail: [''],
+      contactEmailText: [''],
+      reportPath: [''],
+      reportArchivePath: [''],
+      division: [false],
+      active: [false],
+      manualReportFullUrl: [''],
+      manualReportSite: [''],
+      manualReportSiteContent: [''],
+      helpUrl: [''],
+      defaultProductGroup: this.fb.array([]),
+      adminAccessGroup: ['']
+    });
+  }
+
+  save() { 
+  if(this.formGroup.valid){
+  const formValues: MyFormValues = this.formGroup.value;
+    console.log(formValues);
+  }else{
+  console.log("this form is invalid");
+  }
+    
+  }
+
+  cancel() {
+    this.initForm();
+  }
+}
+
 <form [formGroup]="formGroup" class="my-form">
   <div class="form-container">
     <div class="form-section">
@@ -18,7 +88,7 @@
     </div>
   </div>
   <div class="button-container">
-    <button type="button" (click)="save()" class="button save">Save</button>
+    <button type="button" [disabled]="formGroup.invalid" (click)="save()" class="button save">Save</button>
     <button type="button" (click)="cancel()" class="button cancel">Cancel</button>
   </div>
 </form>
