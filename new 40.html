@@ -1,0 +1,83 @@
+<form [formGroup]="formGroup" class="my-form">
+  <div class="form-container">
+    <div class="form-section">
+      <!-- Your left div form controls here -->
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="name">
+      </div>
+      <!-- ... Other form groups ... -->
+    </div>
+    <div class="form-section">
+      <!-- Your right div form controls here -->
+      <div class="form-group">
+        <label>Manual Report Full URL</label>
+        <textarea formControlName="manualReportFullUrl"></textarea>
+      </div>
+      <!-- ... Other form groups ... -->
+    </div>
+  </div>
+  <div class="button-container">
+    <button type="button" (click)="save()" class="button save">Save</button>
+    <button type="button" (click)="cancel()" class="button cancel">Cancel</button>
+  </div>
+</form>
+
+.my-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-section {
+  flex-basis: 48%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button.save {
+  background-color: #4caf50; /* green */
+  margin-right: 10px;
+}
+
+.button.cancel {
+  background-color: #f44336; /* red */
+}
