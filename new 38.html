@@ -1,0 +1,90 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+
+@Component({
+  selector: 'app-my-form',
+  templateUrl: './my-form.component.html',
+  styleUrls: ['./my-form.component.css']
+})
+export class MyFormComponent implements OnInit {
+  formGroup: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
+    this.formGroup = this.fb.group({
+      name: [''],
+      key: [''],
+      contactEmail: [''],
+      contactEmailText: [''],
+      reportPath: [''],
+      reportArchivePath: [''],
+      division: [false],
+      active: [false],
+      manualReportFullUrl: [''],
+      manualReportSite: [''],
+      manualReportSiteContent: [''],
+      helpUrl: [''],
+      defaultProductGroup: this.fb.array([]),
+      adminAccessGroup: ['']
+    });
+  }
+
+  save() {
+    console.log(this.formGroup.value);
+  }
+
+  cancel() {
+    this.initForm();
+  }
+}
+
+
+
+
+<div fxLayout="row" fxLayoutGap="10px" [formGroup]="formGroup">
+  <div fxFlex="50%">
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Key" formControlName="key">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Contact Email" formControlName="contactEmail">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Contact Email Text" formControlName="contactEmailText">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Report Path" formControlName="reportPath"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Report Archive Path" formControlName="reportArchivePath"></textarea>
+    </mat-form-field>
+    <mat-checkbox formControlName="division">Division</mat-checkbox>
+    <mat-checkbox formControlName="active">Active</mat-checkbox>
+  </div>
+  <div fxFlex="50%">
+    <mat-form-field>
+      <textarea matInput placeholder="Manual Report Full URL" formControlName="manualReportFullUrl"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Manual Report Site" formControlName="manualReportSite"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Manual Report Site Content" formControlName="manualReportSiteContent"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Help URL" formControlName="helpUrl"></textarea>
+    </mat-form-field>
+    <!-- Here you would want to dynamically generate checkboxes for "defaultProductGroup" -->
+    <mat-form-field>
+      <input matInput placeholder="Admin Access Group" formControlName="adminAccessGroup">
+    </mat-form-field>
+    <br><br>
+    <button mat-raised-button color="primary" (click)="save()">
