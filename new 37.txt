@@ -1,0 +1,93 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-record-form',
+  templateUrl: './record-form.component.html',
+  styleUrls: ['./record-form.component.css']
+})
+export class RecordFormComponent implements OnInit {
+
+  form: FormGroup;
+  records = [];  // your data would go here
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      id: ['', Validators.required],
+      name: ['', Validators.required],
+      key: ['', Validators.required],
+      division: ['', Validators.required],
+      AdminAccessGroup: ['', Validators.required],
+      active: ['', Validators.required],
+      actions: ['', Validators.required],
+    });
+  }
+
+  ngOnInit(): void {
+    this.records = [
+      {id: 1, name: 'John Doe', key: 'Key1', division: 'Division1', AdminAccessGroup: 'Group1', active: true, actions: 'Action1'},
+      {id: 2, name: 'Jane Doe', key: 'Key2', division: 'Division2', AdminAccessGroup: 'Group2', active: false, actions: 'Action2'}
+    ]
+  }
+
+  onSubmit(): void {
+    console.log(this.form.value);
+    // here you would handle what to do with the form data
+  }
+}
+
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>
+    ID:
+    <input formControlName="id">
+  </label>
+  <label>
+    Name:
+    <input formControlName="name">
+  </label>
+  <label>
+    Key:
+    <input formControlName="key">
+  </label>
+  <label>
+    Division:
+    <input formControlName="division">
+  </label>
+  <label>
+    Admin Access Group:
+    <input formControlName="AdminAccessGroup">
+  </label>
+  <label>
+    Active:
+    <input type="checkbox" formControlName="active">
+  </label>
+  <label>
+    Actions:
+    <input formControlName="actions">
+  </label>
+  <button type="submit">Submit</button>
+</form>
+
+<!-- Displaying data in a table -->
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Key</th>
+    <th>Division</th>
+    <th>Admin Access Group</th>
+    <th>Active</th>
+    <th>Actions</th>
+  </tr>
+  <tr *ngFor="let record of records">
+    <td>{{ record.id }}</td>
+    <td>{{ record.name }}</td>
+    <td>{{ record.key }}</td>
+    <td>{{ record.division }}</td>
+    <td>{{ record.AdminAccessGroup }}</td>
+    <td>{{ record.active ? 'Yes' : 'No' }}</td>
+    <td>{{ record.actions }}</td>
+  </tr>
+</table>
