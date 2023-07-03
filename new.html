@@ -275,3 +275,194 @@ export class AddEditsiteComponent implements OnInit {
 .button.cancel {
     background-color: #f44336; /* red */
 }
+
+
+------------------------------------------------------
+<form [formGroup]="websiteUpdateForm" class="my-form">
+    <div class="form-container">
+        <h2>Website Update Request Form</h2>
+        <div class="form-section">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" formControlName="name">
+                <div *ngIf="websiteUpdateForm.get('name').touched && websiteUpdateForm.get('name').invalid">
+                    Name is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Key</label>
+                <input type="text" formControlName="key">
+            </div>
+            <div class="form-group">
+                <label>Contact Email</label>
+                <input type="text" formControlName="contactEmail">
+                <div *ngIf="websiteUpdateForm.get('contactEmail').touched && websiteUpdateForm.get('contactEmail').invalid">
+                    A valid email is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Contact Email Text</label>
+                <input type="text" formControlName="contactEmailText">
+                <div *ngIf="websiteUpdateForm.get('contactEmailText').touched && websiteUpdateForm.get('contactEmailText').invalid">
+                    Contact email text is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Report Path</label>
+                <input type="text" formControlName="reportPath">
+            </div>
+            <div class="form-group">
+                <label>Report Archive Path</label>
+                <input type="text" formControlName="reportArchivePath">
+            </div>
+            <div class="form-group">
+                <label>Division</label>
+                <input type="text" formControlName="division">
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" formControlName="defaultSite"> Default Site</label>
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" formControlName="active"> Active</label>
+            </div>
+            <div class="form-group">
+                <label>Manual Report Full URL</label>
+                <input type="text" formControlName="manualReportFullUrl">
+            </div>
+            <div class="form-group">
+                <label>Manual Report Site</label>
+                <input type="text" formControlName="manualReportSite">
+            </div>
+            <div class="form-group">
+                <label>Manual Report Site Content</label>
+                <input type="text" formControlName="manualReportSiteContent">
+            </div>
+            <div class="form-group">
+                <label>Help URL</label>
+                <input type="text" formControlName="helpUrl">
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" formControlName="defaultProductGroup"> Default Product Group</label>
+            </div>
+            <div class="form-group">
+                <label>Admin Access Group</label>
+                <input type="text" formControlName="adminAccessGroup">
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <button type="submit" [disabled]="websiteUpdateForm.invalid" (click)="submit()" class="button save">Submit</button>
+        <button type="button" (click)="cancel()" class="button cancel">Cancel</button>
+    </div>
+</form>
+
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+
+@Component({
+  selector: 'app-website-update',
+  templateUrl: './website-update.component.html',
+  styleUrls: ['./website-update.component.css']
+})
+export class WebsiteUpdateComponent implements OnInit {
+  websiteUpdateForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.websiteUpdateForm = this.formBuilder.group({
+      name: ['My Reports', Validators.required],
+      key: ['PSS_myReports', Validators.required],
+      contactEmail: ['', [Validators.required, Validators.email]],
+      contactEmailText: ['', [Validators.required, Validators.email]],
+      reportPath: [''],
+      reportArchivePath: [''],
+      division: [''],
+      defaultSite: [false],
+      active: [false],
+      manualReportFullUrl: [''],
+      manualReportSite: [''],
+      manualReportSiteContent: [''],
+      helpUrl: [''],
+      defaultProductGroup: this.formBuilder.array([false]),
+      adminAccessGroup: ['']
+    });
+  }
+
+  get defaultProductGroup() {
+    return this.websiteUpdateForm.get('defaultProductGroup') as FormArray;
+  }
+
+  submit() {
+    if (this.websiteUpdateForm.valid) {
+      console.log(this.websiteUpdateForm.value);
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+
+  cancel() {
+    this.websiteUpdateForm.reset();
+  }
+}
+
+
+.website-update {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+}
+
+.website-update .form-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.website-update .form-section {
+    flex-basis: 48%;
+}
+
+.website-update .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.website-update .form-group label {
+    margin-bottom: 5px; 
+    font-weight: bold;
+}
+
+.website-update .form-group input[type="text"],
+.website-update .form-group textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.website-update .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.website-update .button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.website-update .button.save {
+    background-color: #8caf50;
+    margin-right: 10px;
+}
+
+.website-update .button.cancel {
+    background-color: #f44336;
+}
