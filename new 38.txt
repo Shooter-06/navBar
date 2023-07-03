@@ -1,0 +1,63 @@
+// record.ts
+export class Record {
+    id: number;
+    name: string;
+    key: string;
+    division: string;
+    AdminAccessGroup: string;
+    active: boolean;
+    actions: string;
+
+    constructor(id: number, name: string, key: string, division: string, AdminAccessGroup: string, active: boolean, actions: string) {
+        this.id = id;
+        this.name = name;
+        this.key = key;
+        this.division = division;
+        this.AdminAccessGroup = AdminAccessGroup;
+        this.active = active;
+        this.actions = actions;
+    }
+}
+
+
+// record-form.component.ts
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Record } from './record';
+
+@Component({
+  selector: 'app-record-form',
+  templateUrl: './record-form.component.html',
+  styleUrls: ['./record-form.component.css']
+})
+export class RecordFormComponent implements OnInit {
+
+  form: FormGroup;
+  records: Record[] = [];  // Array of Record objects
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      id: ['', Validators.required],
+      name: ['', Validators.required],
+      key: ['', Validators.required],
+      division: ['', Validators.required],
+      AdminAccessGroup: ['', Validators.required],
+      active: ['', Validators.required],
+      actions: ['', Validators.required],
+    });
+  }
+
+  ngOnInit(): void {
+    // Create instances of the Record class
+    let record1 = new Record(1, 'John Doe', 'Key1', 'Division1', 'Group1', true, 'Action1');
+    let record2 = new Record(2, 'Jane Doe', 'Key2', 'Division2', 'Group2', false, 'Action2');
+
+    // Add the instances to the records array
+    this.records.push(record1, record2);
+  }
+
+  onSubmit(): void {
+    console.log(this.form.value);
+    // handle form submission
+  }
+}
