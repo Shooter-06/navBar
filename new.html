@@ -1,0 +1,277 @@
+// ts
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+
+export interface MyFormValues {
+    name: string;
+    key: string;
+    contactEmail: string;
+    contactEmailText: string;
+    reportPath: string;
+    reportArchivePath: string;
+    division: boolean;
+    defaultSite: boolean;
+    active: boolean;
+    manualReportFullUrl: string;
+    manualReportSite: string;
+    manualReportSiteContent: string;
+    helpUrl: string;
+    defaultProductGroup: boolean[];
+    adminAccessGroup: string;
+}
+
+export interface DropValues {
+    id: number;
+    descr: string;
+}
+
+@Component({
+    selector: 'app-add-edit-site',
+    templateUrl: './add-edit-site.component.html',
+    styleUrls: ['./add-edit-site.component.scss']
+})
+export class AddEditsiteComponent implements OnInit {
+    adminForm!: FormGroup;
+    selectedValues: DropValues[] = [];
+    domainValues!: MyFormValues;
+
+    constructor(private form: FormBuilder) { }
+
+    companyNames!: Array<string>;
+    modelValue?: string = undefined;
+
+    marketData: DropValues[] = [
+        { id: 0, descr: "This is the first option" },
+        { id: 1, descr: "This is the second option" },
+        { id: 2, descr: "This is the third option" }
+    ];
+
+    ngOnInit() {
+        this.companyNames = this.marketData.slice(0, 2).map((item, index) => `${index}: ${item.descr}`);
+        this.initForm();
+    }
+
+    onSelectionChange(event: any) {
+        console.log(event);
+    }
+
+    initForm() {
+        this.adminForm = this.form.group({
+            name: ['My Reports'],
+            key: ['PSS_myReports'],
+            contactEmail: ['', [Validators.required, Validators.email]],
+            contactEmailText: ['', [Validators.required, Validators.email]],
+            reportPath: [''],
+            reportArchivePath: [''],
+            division: [''],
+            defaultSite: [false],
+            active: [false],
+            manualReportFullUrl: [''],
+            manualReportSite: [''],
+            manualReportSiteContent: [''],
+            helpUrl: [''],
+            defaultProductGroup: this.form.array([false]),
+            adminAccessGroup: ['']
+        });
+    }
+
+    save() {
+        if (this.adminForm.valid) {
+            this.domainValues = this.adminForm.value;
+            console.log(this.domainValues);
+        } else {
+            console.log('Form is invalid');
+        }
+    }
+
+    cancel() {
+        this.initForm();
+    }
+}
+
+
+// html
+
+<form [formGroup]="adminForm" class="my-form">
+    <div class="form-container">
+        <div class="form-section">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" formControlName="name">
+                <div *ngIf="adminForm.get('name').touched && adminForm.get('name').invalid">
+                    Name is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Key</label>
+                <input type="text" formControlName="key">
+                <div *ngIf="adminForm.get('key').touched && adminForm.get('key').invalid">
+                    Key is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Contact Email</label>
+                <input type="text" formControlName="contactEmail">
+                <div *ngIf="adminForm.get('contactEmail').touched && adminForm.get('contactEmail').invalid">
+                    A valid email is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Contact Email Text</label>
+                <input type="text" formControlName="contactEmailText">
+                <div *ngIf="adminForm.get('contactEmailText').touched && adminForm.get('contactEmailText').invalid">
+                    Email text is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Report Path</label>
+                <textarea formControlName="reportPath"></textarea>
+                <div *ngIf="adminForm.get('reportPath').touched && adminForm.get('reportPath').invalid">
+                    Report Path is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Report Archive Path</label>
+                <textarea formControlName="reportArchivePath"></textarea>
+                <div *ngIf="adminForm.get('reportArchivePath').touched && adminForm.get('reportArchivePath').invalid">
+                    Report Archive Path is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Division</label>
+                <msui-single-select customClass="drp-exa" [items]="companyNames" [(ngModel)]="modelValue" name="values"
+                    (select)="onSelectionChange($event)">
+                </msui-single-select>
+                <div *ngIf="adminForm.get('values').touched && adminForm.get('values').invalid">
+                    Please select a division.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" formControlName="defaultSite">Default Site
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" formControlName="active">Active
+                </label>
+            </div>
+        </div>
+        <div class="form-section">
+            <div class="form-group">
+                <label>Manual Report Full URL</label>
+                <textarea formControlName="manualReportFullUrl"></textarea>
+                <div *ngIf="adminForm.get('manualReportFullUrl').touched && adminForm.get('manualReportFullUrl').invalid">
+                    Full URL is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Manual Report Site</label>
+                <textarea formControlName="manualReportSite"></textarea>
+                <div *ngIf="adminForm.get('manualReportSite').touched && adminForm.get('manualReportSite').invalid">
+                    Report Site is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Manual Report Site Content</label>
+                <textarea formControlName="manualReportSiteContent"></textarea>
+                <div *ngIf="adminForm.get('manualReportSiteContent').touched && adminForm.get('manualReportSiteContent').invalid">
+                    Site Content is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Help URL</label>
+                <textarea formControlName="helpUrl"></textarea>
+                <div *ngIf="adminForm.get('helpUrl').touched && adminForm.get('helpUrl').invalid">
+                    Help URL is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Default Product Group</label>
+                <msui-multi-select [items]="companyNames" [(ngModel)]="selectedValues" name="dropValues"
+                    (select)="onSelectionChange($event)">
+                </msui-multi-select>
+                <div *ngIf="adminForm.get('dropValues').touched && adminForm.get('dropValues').invalid">
+                    Please select at least one product group.
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Admin Access Group</label>
+                <input type="text" formControlName="adminAccessGroup">
+                <div *ngIf="adminForm.get('adminAccessGroup').touched && adminForm.get('adminAccessGroup').invalid">
+                    Admin Access Group is required.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <button type="submit" [disabled]="adminForm.invalid" (click)="save()" class="button save">Save</button>
+        <button type="button" (click)="cancel()" class="button cancel">Cancel</button>
+    </div>
+</form>
+
+
+// css
+
+.my-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-section {
+    flex-basis: 48%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button.save {
+    background-color: #8caf50; /* green */
+    margin-right: 10px;
+}
+
+.button.save.invalid {
+    background-color: gray;
+}
+
+.button.cancel {
+    background-color: #f44336; /* red */
+}
