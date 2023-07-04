@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left,
+.right {
+  flex: 1;
+}
+
+.left {
+  margin-right: 10px;
+}
+
+.right {
+  margin-left: 10px;
+}
+
+.form-field {
+  margin-bottom: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="left">
+    <form action="/submit" method="post">
+      <div class="form-field">
+        <label for="fname1">First name:</label><br>
+        <input type="text" id="fname1" name="fname1"><br>
+      </div>
+      <div class="form-field">
+        <label for="lname1">Last name:</label><br>
+        <input type="text" id="lname1" name="lname1"><br>
+      </div>
+      <div class="form-field">
+        <label for="email1">Email:</label><br>
+        <input type="email" id="email1" name="email1"><br>
+      </div>
+      <div class="form-field">
+        <label for="password1">Password:</label><br>
+        <input type="password" id="password1" name="password1"><br>
+      </div>
+      <div class="form-field">
+        <label for="phone1">Phone:</label><br>
+        <input type="tel" id="phone1" name="phone1"><br>
+      </div>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <div class="right">
+    <form action="/submit" method="post">
+      <div class="form-field">
+        <label for="fname2">First name:</label><br>
+        <input type="text" id="fname2" name="fname2"><br>
+      </div>
+      <div class="form-field">
+        <label for="lname2">Last name:</label><br>
+        <input type="text" id="lname2" name="lname2"><br>
+      </div>
+      <div class="form-field">
+        <label for="email2">Email:</label><br>
+        <input type="email" id="email2" name="email2"><br>
+      </div>
+      <div class="form-field">
+        <label for="password2">Password:</label><br>
+        <input type="password" id="password2" name="password2"><br>
+      </div>
+      <div class="form-field">
+        <label for="phone2">Phone:</label><br>
+        <input type="tel" id="phone2" name="phone2"><br>
+      </div>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

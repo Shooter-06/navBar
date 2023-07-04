@@ -1,0 +1,68 @@
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
+
+export interface DropValues {
+    id: number;
+    descr: string;
+}
+
+@Component({
+    selector: 'app-add-edit-site',
+    templateUrl: "./add-edit-site.component.html",
+    styleUrls: ["./add-edit-site.component.scss"]
+})
+
+export class AddEditSiteComponent implements OnInit {
+    adminForm!: FormGroup;
+    data: DropValues[] = [
+        { id: 0, descr: "This is the first Option" },
+        { id: 1, descr: "This is the second Option" },
+        { id: 2, descr: "This is the third option" }
+    ];
+
+    constructor(private formBuilder: FormBuilder) {}
+
+    ngOnInit() {
+        this.initForm();
+    }
+
+    initForm() {
+        this.adminForm = this.formBuilder.group({
+            name: ['', Validators.required],
+            key: [''],
+            contactEmail: ['', [Validators.required, Validators.email]],
+            contactEmailText: [''],
+            reportPath: [''],
+            reportArchivePath: [''],
+            division: [''],
+            defaultSite: [false],
+            active: [false],
+            manualReportFullUrl: [''],
+            manualReportSite: [''],
+            manualReportSiteContent: [''],
+            helpUrl: [''],
+            defaultProductGroup: this.formBuilder.array([false]),
+            adminAccessGroup: ['']
+        });
+    }
+
+    get defaultProductGroup() {
+        return this.adminForm.get('defaultProductGroup') as FormArray;
+    }
+
+    save() {
+        if (this.adminForm.valid) {
+            console.log(this.adminForm.value);
+        } else {
+            console.log('Form is invalid');
+        }
+    }
+
+    cancel() {
+        this.initForm();
+        console.log("Form is reset");
+    }
+}
+
+
+
