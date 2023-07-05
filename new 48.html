@@ -1,0 +1,124 @@
+// service 
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RecordsService {
+
+  private records = new BehaviorSubject<any[]>([]);
+  currentRecords = this.records.asObservable();
+
+  constructor() { }
+
+  addRecord(record: any) {
+    const currentValue = this.records.value;
+    const updatedValue = [...currentValue, record];
+    this.records.next(updatedValue);
+  }
+}
+
+
+// form component 
+import { Component } from '@angular/core';
+import { RecordsService } from '../records.service';
+
+@Component({
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
+})
+export class FormComponent {
+
+  firstName = '';
+  lastName = '';
+  email = '';
+  phone = '';
+  address = '';
+
+  constructor(private recordsService: RecordsService) {}
+
+  addRecord() {
+    const newRecord = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      phone: this.phone,
+      address: this.address
+    };
+
+    this.recordsService.addRecord(newRecord);
+
+    // Reset form fields
+    this.firstName = '';
+    this.lastName = '';
+    this.email = '';
+    this.phone = '';
+    this.address = '';
+  }
+}
+
+<form>
+  <label for="fname">First Name:</label><br>
+  <input type="text" id="fname" [(ngModel)]="firstName" name="fname"><br>
+
+  <label for="lname">Last Name:</label><br>
+  <input type="text" id="lname" [(ngModel)]="lastName" name="lname"><br>
+
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" [(ngModel)]="email" name="email"><br>
+
+  <label for="phone">Phone:</label><br>
+  <input type="tel" id="phone" [(ngModel)]="phone" name="phone"><br>
+
+  <label for="address">Address:</label><br>
+  <input type="text" id="address" [(ngModel)]="address" name="address"><br>
+
+  <button (click)="addRecord()">Save</button>
+</form>
+
+
+
+
+// Table component
+import { Component, OnInit } from '@angular/core';
+import { RecordsService } from '../records.service';
+
+@Component({
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.css']
+})
+export class TableComponent implements OnInit {
+
+  records = [];
+
+  constructor(private recordsService: RecordsService) {}
+
+  ngOnInit() {
+    this.recordsService.currentRecords.subscribe(records => this.records = records);
+  }
+}
+
+
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let record of records">
+      <td>{{record.firstName}}</td>
+      <td>{{record.lastName}}</td>
+      <td>{{record.email}}</td>
+      <td>{{record.phone}}</td>
+      <td>{{record.address}}</td>
+    </tr>
+  </tbody>
+</table>
