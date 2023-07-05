@@ -1,0 +1,23 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  firstName: string = '';
+  subscribe: boolean = false;
+}
+
+
+<form>
+  <label for="fname">First Name:</label><br>
+  <input type="text" id="fname" name="fname" [(ngModel)]="firstName"><br>
+  <input type="checkbox" id="subscribe" name="subscribe" [(ngModel)]="subscribe">
+  <label for="subscribe">Subscribe to newsletter</label><br>
+  <input type="submit" value="Submit">
+</form>
+
+<p>First Name is: {{firstName}}</p>
+<p>Subscribed: {{subscribe ? 'Yes' : 'No'}}</p>
