@@ -43,6 +43,28 @@ export class MemoryDataService implements InMemoryDbService {
             divisionId
         }));
     }
+	
+	
+	createDb(): Promise<InMemoryDb> {
+    return Promise.all([
+        this.fetchJson('Fake-data/Site.json')
+    ]).then((data) => {
+        console.log(data); // Log the fetched data
+        const {
+            portalServiceSiteId,
+            portalServiceSite,
+            portalServicesiteKey,
+            divisionId
+        } = data;
+        return {
+            portalServiceSiteId,
+            portalServiceSite,
+            portalServicesiteKey,
+            divisionId
+        };
+    });
+}
+
 
     // Parses the request URL for query parameters
     parseRequestUrl(url: string, utils: RequestInfo): ParsedRequestUrl {
@@ -77,11 +99,13 @@ export class MemoryDataService implements InMemoryDbService {
     }
 
     // Helper function to fetch JSON from a URL
-    private fetchJson<T = any>(url: string): Promise<T> {
+        private fetchJson<T = any>(url: string): Promise<T> {
         return fetch(url)
             .then(response => response.json())
-            .then(value => value as T);
+            .then(value => value as T)
+            .catch(error => console.error('Error in fetchJson:', error));
     }
+
 
     // Create a custom response based on the request info and data
     private createCustomResponse(requestInfo: RequestInfo, data: any): Observable<any> {
