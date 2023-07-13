@@ -137,3 +137,62 @@ export class SiteComponent implements OnInit, OnDestroy {
 
 
 
+.main-container {
+  width: 100%;
+  padding: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+
+  th {
+    padding: 10px;
+    text-align: left;
+    background-color: #BCD2EE;
+  }
+
+  td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+
+    a {
+      color: #000;
+      text-decoration: none;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+  }
+
+  tr {
+    &:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    &.active-row {
+      background-color: #BCD2EE;
+    }
+  }
+}
+
+button {
+  background-color: #BCD2EE;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #007bff;
+    color: white;
+  }
+}
