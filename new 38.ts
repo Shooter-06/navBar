@@ -27,23 +27,6 @@ export class MemoryDataService implements InMemoryDbService {
         this.pathOverrides.set('admin/add-Edit-Site', 'divisionId');
     }
 
-    // Creates an instance of the InMemoryDb
-    createDb(): Promise<InMemoryDb> {
-        return Promise.all([
-            this.fetchJson('Fake-data/Site.json')
-        ]).then(({
-            portalServiceSiteId,
-            portalServiceSite,
-            portalServicesiteKey,
-            divisionId
-        }) => ({
-            portalServiceSiteId,
-            portalServiceSite,
-            portalServicesiteKey,
-            divisionId
-        }));
-    }
-	
 	
 	createDb(): Promise<InMemoryDb> {
     return Promise.all([
